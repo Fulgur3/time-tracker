@@ -1,0 +1,18 @@
+package com.model.entity;
+
+public enum ActivityRequestStatus {
+    PENDING("Pending"),
+    APPROVED("Approved"),
+    REJECTED("Rejected");
+
+    private final String simpleName;
+
+    ActivityRequestStatus(String simpleName) {
+        this.simpleName = simpleName;
+    }
+
+    @Override
+    public String toString() {
+        return simpleName;
+    }
+}

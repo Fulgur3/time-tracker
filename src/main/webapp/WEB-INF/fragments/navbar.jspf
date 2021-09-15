@@ -1,0 +1,71 @@
+<%--suppress CheckImageSize, CheckImageSize --%>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/app/index">
+        <img src="${pageContext.request.contextPath}/images/stopwatch-white.png" class="d-inline-block align-top"
+             width="30" height="30" alt="icon">
+        Time-Tracker
+    </a>
+    <div class="collapse navbar-collapse" id="navbars">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="${pageContext.request.contextPath}/app/index">
+                    <fmt:message key="link.home"/>
+                </a>
+            </li>
+            <c:if test="${sessionScope.authUser != null}">
+                <li class="nav-item active">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/app/profile">
+                        <fmt:message key="link.profile"/>
+                    </a>
+                </li>
+            </c:if>
+            <tt:hasAuthority authority="ADMIN">
+                <li class="nav-item active">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/app/users">
+                        <fmt:message key="link.all_users"/>
+                    </a>
+                </li>
+            </tt:hasAuthority>
+            <c:if test="${sessionScope.authUser != null}">
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-expanded="false" aria-haspopup="true">
+                        <fmt:message key="link.activities"/>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/app/activities">
+                            <fmt:message key="link.all_activities"/>
+                        </a>
+                        <tt:hasAuthority authority="ADMIN">
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/app/activities/add">
+                                <fmt:message key="link.add_activity"/>
+                            </a>
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/app/activities/request">
+                                <fmt:message key="link.all_activity_requests"/>
+                            </a>
+                        </tt:hasAuthority>
+                    </div>
+                </li>
+            </c:if>
+        </ul>
+        <c:if test="${sessionScope.authUser == null}">
+            <div class="form-inline my-2 my-lg-0">
+                <a href="${pageContext.request.contextPath}/app/registration"
+                   class="btn btn-outline-primary mr-3 my-2 my-sm-0">
+                    <fmt:message key="button.signup"/>
+                </a>
+                <a href="${pageContext.request.contextPath}/app/login" class="btn btn-primary mr-3 my-2 my-sm-0">
+                    <fmt:message key="button.signin"/>
+                </a>
+            </div>
+        </c:if>
+        <c:if test="${sessionScope.authUser != null}">
+            <div class="form-inline my-2 my-lg-0">
+                <a href="${pageContext.request.contextPath}/app/logout" class="btn btn-primary my-2 my-sm-0">
+                    <fmt:message key="button.signout"/>
+                </a>
+            </div>
+        </c:if>
+    </div>
+</nav>
